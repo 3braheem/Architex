@@ -9,7 +9,12 @@ const SearchBar = ({ handleSearch }: ISearchBar) => {
     handleSearch(e.target.value);
   };
   return (
-    <input className="w-full font-body" type="text" onChange={handleChange} />
+    <input
+      placeholder="Search..."
+      className="w-full font-body p-1 focus:outline-none"
+      type="text"
+      onChange={handleChange}
+    />
   );
 };
 

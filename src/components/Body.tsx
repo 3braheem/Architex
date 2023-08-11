@@ -7,8 +7,10 @@ import { IContent } from "./Content.tsx";
 const Body = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const filterBuildings = (data: IContent[]) => {
-    return data.filter((item: IContent) =>
-      item.description.toLowerCase().includes(searchTerm.toLowerCase())
+    return data.filter(
+      (item: IContent) =>
+        item.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.location.toLowerCase().includes(searchTerm.toLowerCase())
     );
   };
 
@@ -17,7 +19,7 @@ const Body = () => {
       <Card>
         <SearchBar handleSearch={setSearchTerm} />
       </Card>
-      <div className="relative flex w-full flex-wrap items-center justify-center font-body">
+      <div className="grid lg:grid-cols-2 w-full items-center justify-center font-body">
         <BuildingGroups filterBy={filterBuildings} />
       </div>
     </>
