@@ -8,7 +8,7 @@ export interface IContent {
 
 const Content = ({ description, location, src, alt }: IContent) => {
   return (
-    <div className="flex justify-items-start w-[22rem] h-56 overflow-hidden">
+    <div className="flex justify-items-start w-[33rem] h-72 overflow-hidden">
       <img src={src} alt={alt} className="w-full h-full object-cover" />
       <div className="flex flex-col content-end pl-3 pt-3">
         <h2>{description}</h2>

@@ -1,7 +1,6 @@
 import NavCard from "./components/NavCard.tsx";
 import NavBar from "./components/NavBar.tsx";
 import Body from "./components/Body.tsx";
-import BuildingGroups from "./components/BuildingGroups.tsx";
 
 function App() {
   return (
@@ -9,9 +8,7 @@ function App() {
       <NavCard>
         <NavBar />
       </NavCard>
-      <Body>
-        <BuildingGroups />
-      </Body>
+      <Body />
     </>
   );
 }

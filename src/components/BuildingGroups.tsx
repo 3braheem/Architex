@@ -1,8 +1,14 @@
 import Card from "./Card.tsx";
 import Content from "./Content.tsx";
 import { IContent } from "./Content.tsx";
+import { useInfiniteQuery } from "react-query";
+import { useRef, useEffect, useState } from "react";
 
-const BuildingGroups = () => {
+type Filter = {
+  filterBy: (input: IContent[]) => IContent[];
+};
+
+const BuildingGroups = ({ filterBy }: Filter) => {
   const lideta =
     "https://s3.amazonaws.com/media.archnet2.org/f8evrga5pew66zagkysmjri5p3zz?response-content-disposition=inline%3B%20filename%3D%2201_4929.jpg%22%3B%20filename%2A%3DUTF-8%27%2701_4929.jpg&response-content-type=image%2Fjpeg&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAY5HI6LAFBDPCQ43G%2F20230804%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230804T214625Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=b38095774a82e72c81475ff25c58fffd9ede6aa62fc11f5717b52be02f7b5712";
   const sliceHouse =
@@ -55,18 +61,64 @@ const BuildingGroups = () => {
     },
   ];
 
+  const repeatedBuildings: IContent[] = [];
+
+  for (let i = 0; i < 8; i++) {
+    repeatedBuildings.push(...buildings);
+  }
+
+  const fetchGroup = async (page: number) => {
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    return repeatedBuildings.slice((page - 1) * 6, page * 6);
+  };
+
+  const { data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
+    ["query"],
+    async ({ pageParam = 1 }) => {
+      const res = await fetchGroup(pageParam);
+      return res;
+    },
+    {
+      getNextPageParam: (_, pages) => {
+        return pages.length + 1;
+      },
+      initialData: {
+        pages: [repeatedBuildings.slice(0, 6)],
+        pageParams: [1],
+      },
+    }
+  );
+
+  /*   const elementRef = useRef();
+  const [isVisible, setVisible] = useState();
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+    });
+    //observer.observe(elementRef.current);
+  }, []); */
+
   return (
     <>
-      {buildings.map((building) => (
-        <Card>
-          <Content
-            description={building.description}
-            location={building.location}
-            src={building.src}
-            alt={building.alt}
-          />
-        </Card>
+      {filterBy(repeatedBuildings).map((item) => (
+        <>
+          <Card onHover="hover:border-green-400 hover:saturate-100">
+            <Content
+              description={item.description}
+              location={item.location}
+              src={item.src}
+              alt={item.alt}
+            />
+          </Card>
+        </>
       ))}
+      {/* <button onClick={() => fetchNextPage()} disabled={isFetchingNextPage}>
+        {isFetchingNextPage
+          ? "Loading More..."
+          : (data?.pages.length ?? 0) < 8
+          ? "Load More"
+          : "Nothing More to Load."}
+      </button> */}
     </>
   );
 };
