@@ -1,6 +1,8 @@
-import NavCard from "./components/NavCard.tsx";
-import NavBar from "./components/NavBar.tsx";
-import Body from "./components/Body.tsx";
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import NavCard from "./components/NavCard";
+import NavBar from "./components/NavBar";
 
 function App() {
   return (
@@ -8,7 +10,10 @@ function App() {
       <NavCard>
         <NavBar />
       </NavCard>
-      <Body />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
     </>
   );
 }
