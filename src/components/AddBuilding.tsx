@@ -1,10 +1,97 @@
 import { Button } from "../../@/components/ui/button";
+import { Label } from "../../@/components/ui/label";
+import { Input } from "../../@/components/ui/input";
+import * as Dialog from "@radix-ui/react-dialog";
+import { Cross2Icon } from "@radix-ui/react-icons";
 
 const AddBuilding = () => {
   return (
-    <Button className="font-body p-3 m-1 border border-black hover:border-green-700">
-      Add
-    </Button>
+    <Dialog.Root>
+      <Dialog.Trigger asChild>
+        <Button className="font-body p-3 m-1 border border-black hover:border-green-700">
+          Add
+        </Button>
+      </Dialog.Trigger>
+      <Dialog.Portal>
+        <Dialog.Overlay className="bg-stone-200/30 fixed inset-0" />
+        <Dialog.Content className="bg-white rounded shadow-md fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-8 focus:outline-none w-96 lg:w-1/3">
+          <Dialog.Title className="pb-4 text-xl font-display">
+            Add a Building
+          </Dialog.Title>
+          <Dialog.Description className="pb-4 font-body text-slate-800">
+            Enter the given parameters to add a building of your choice to the
+            site.
+          </Dialog.Description>
+          <fieldset className="flex gap-8 mb-2 items-center">
+            <Label
+              className="font-body text-slate-600 text-sm w-24"
+              htmlFor="name"
+            >
+              Name
+            </Label>
+            <Input
+              className="flex justify-center items-center focus:outline-none p-2 font-body text-slate-700 border border-black w-full"
+              id="name"
+            />
+          </fieldset>
+          <fieldset className="flex gap-8 mb-2 items-center">
+            <Label
+              className="font-body text-slate-600 text-sm w-24"
+              htmlFor="imglink"
+            >
+              Image
+            </Label>
+            <Input
+              className="flex justify-center items-center focus:outline-none p-2 font-body text-slate-700 border border-black w-full"
+              id="imglink"
+            />
+          </fieldset>
+          <fieldset className="flex gap-8 mb-2 items-center">
+            <Label
+              className="font-body text-slate-600 text-sm w-24"
+              htmlFor="location"
+            >
+              Location
+            </Label>
+            <Input
+              className="flex justify-center items-center focus:outline-none p-2 font-body text-slate-700 border border-black w-full"
+              id="location"
+            />
+          </fieldset>
+          <fieldset className="flex gap-8 items-center">
+            <Label
+              className="font-body text-slate-600 text-sm w-24"
+              htmlFor="alttext"
+            >
+              Alt
+            </Label>
+            <Input
+              className="flex justify-center items-center focus:outline-none p-2 font-body text-slate-700 border border-black w-full"
+              id="alttext"
+            />
+          </fieldset>
+          <div
+            style={{
+              display: "flex",
+              marginTop: 25,
+              justifyContent: "flex-end",
+            }}
+          ></div>
+          <div className="flex justify-between">
+            <Dialog.Close asChild>
+              <Button className="IconButton" aria-label="Close">
+                <Cross2Icon />
+              </Button>
+            </Dialog.Close>
+            <Dialog.Close asChild>
+              <Button className="bg-slate-400 text-white font-body p-2">
+                Submit
+              </Button>
+            </Dialog.Close>
+          </div>
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
   );
 };
 
