@@ -1,11 +1,7 @@
 import Body from "../components/Body";
 
 const Home = () => {
-  return (
-    <>
-      <Body />
-    </>
-  );
+  return <Body />;
 };
 
 export default Home;

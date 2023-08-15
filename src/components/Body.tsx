@@ -7,6 +7,7 @@ import AddBuilding from "./AddBuilding.tsx";
 import DeleteBuilding from "./DeleteBuilding.tsx";
 
 const Body = () => {
+  const [isDeleting, setIsDeleting] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const filterBuildings = (data: IContent[]) => {
     return data.filter(
@@ -74,11 +75,15 @@ const Body = () => {
         <SearchBar handleSearch={setSearchTerm} />
       </Card>
       <div className="grid lg:grid-cols-2 w-full items-center justify-center font-body">
-        <BuildingGroups searchFilter={filterBuildings} buildings={buildings} />
+        <BuildingGroups
+          searchFilter={filterBuildings}
+          buildings={buildings}
+          isDeleting={isDeleting}
+        />
       </div>
       <div className="grid lg:grid-cols-2 justify-stretch p-1">
-        <AddBuilding />
-        <DeleteBuilding />
+        <AddBuilding isDeleting={isDeleting} />
+        <DeleteBuilding setIsDeleting={setIsDeleting} isDeleting={isDeleting} />
       </div>
     </>
   );

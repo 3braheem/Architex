@@ -4,17 +4,24 @@ import { Input } from "../../@/components/ui/input";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Cross2Icon } from "@radix-ui/react-icons";
 
-const AddBuilding = () => {
+interface IAddBuilding {
+  isDeleting: boolean;
+}
+
+const AddBuilding = ({ isDeleting }: IAddBuilding) => {
+  const disabledOrNot = isDeleting
+    ? "font-body p-3 m-1 border border-black opacity-50"
+    : "font-body p-3 m-1 border border-black hover:border-green-700";
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <Button className="font-body p-3 m-1 border border-black hover:border-green-700">
+        <Button className={disabledOrNot} disabled={isDeleting}>
           Add
         </Button>
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="bg-stone-200/30 fixed inset-0" />
-        <Dialog.Content className="bg-white rounded shadow-md fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-8 focus:outline-none w-96 lg:w-1/3">
+        <Dialog.Content className="bg-white shadow-md fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-8 focus:outline-none w-96 lg:w-1/3">
           <Dialog.Title className="pb-4 text-xl font-display">
             Add a Building
           </Dialog.Title>
@@ -30,7 +37,7 @@ const AddBuilding = () => {
               Name
             </Label>
             <Input
-              className="flex justify-center items-center focus:outline-none p-2 font-body text-slate-700 border border-black w-full"
+              className="flex justify-center items-center focus:outline-none focus:border-green-400 p-2 font-body text-slate-700 border border-black w-full"
               id="name"
             />
           </fieldset>
@@ -39,22 +46,22 @@ const AddBuilding = () => {
               className="font-body text-slate-600 text-sm w-24"
               htmlFor="imglink"
             >
-              Image
+              Image URL
             </Label>
             <Input
-              className="flex justify-center items-center focus:outline-none p-2 font-body text-slate-700 border border-black w-full"
+              className="flex justify-center items-center focus:outline-none focus:border-green-400 p-2 font-body text-slate-700 border border-black w-full"
               id="imglink"
             />
           </fieldset>
           <fieldset className="flex gap-8 mb-2 items-center">
             <Label
-              className="font-body text-slate-600 text-sm w-24"
+              className="font-body text-slate-700 text-sm w-24"
               htmlFor="location"
             >
               Location
             </Label>
             <Input
-              className="flex justify-center items-center focus:outline-none p-2 font-body text-slate-700 border border-black w-full"
+              className="flex justify-center items-center focus:outline-none focus:border-green-400 p-2 font-body text-slate-700 border border-black w-full"
               id="location"
             />
           </fieldset>
@@ -66,7 +73,7 @@ const AddBuilding = () => {
               Alt
             </Label>
             <Input
-              className="flex justify-center items-center focus:outline-none p-2 font-body text-slate-700 border border-black w-full"
+              className="flex justify-center items-center focus:outline-none focus:border-green-400 p-2 font-body text-slate-700 border border-black w-full"
               id="alttext"
             />
           </fieldset>
@@ -84,7 +91,7 @@ const AddBuilding = () => {
               </Button>
             </Dialog.Close>
             <Dialog.Close asChild>
-              <Button className="bg-slate-400 text-white font-body p-2">
+              <Button className="bg-slate-400 hover:bg-green-400 text-white font-body p-2">
                 Submit
               </Button>
             </Dialog.Close>
