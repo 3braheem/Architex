@@ -1,3 +1,3 @@
 # "Architex"
 
-![An example image showing how the project works](blob:https://imgur.com/698cd20c-acdf-4d82-bbd9-7290eb2dc917)
+![Screenshot 2023-08-17 173842](https://github.com/3braheem/Example-Design-Studio-Website/assets/94210025/e7437962-7a47-440f-9a4f-3adc69d795f9)
