@@ -14,7 +14,7 @@ const Body = () => {
   const filterBuildings = (data: IContent[]) => {
     return data.filter(
       (item: IContent) =>
-        item.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         item.location.toLowerCase().includes(searchTerm.toLowerCase())
     );
   };

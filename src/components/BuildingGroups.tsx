@@ -18,9 +18,10 @@ const BuildingGroups = ({ searchFilter, buildings, isDeleting }: Filter) => {
             className={isDeleting ? "border-red-400 hover:border-red-400" : ""}
           >
             <Content
-              description={item.description}
+              key={item.id}
+              name={item.name}
               location={item.location}
-              src={item.src}
+              image={item.image}
               alt={item.alt}
               isDeleting={isDeleting}
             />
