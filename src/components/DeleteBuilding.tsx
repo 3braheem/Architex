@@ -8,7 +8,7 @@ interface IDeleteBuilding {
 const DeleteBuilding = ({ setIsDeleting, isDeleting }: IDeleteBuilding) => {
   return (
     <Button
-      className="font-body p-3 m-1 border border-black hover:border-green-700"
+      className="font-body p-3 m-1 border border-black hover:border-red-700"
       onClick={() => setIsDeleting(!isDeleting)}
     >
       {isDeleting ? "Cancel" : "Delete"}
